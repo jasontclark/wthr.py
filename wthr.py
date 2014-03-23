@@ -1,4 +1,8 @@
 #!/usr/bin/python2
+"""
+wthr.py -- Weather Underground command-line client, written in python
+"""
+
 import urllib2, json 				#fetching weather
 import os, sys, getopt, subprocess	#reading parameters
 
@@ -16,22 +20,17 @@ def fetch_data():
 		LOC = (CONFIG_INFO['zip'])	#zip code
 		JSON = json.loads(urllib2.urlopen("http://api.wunderground.com/api/%s/conditions/forecast/q/%s.json" % (KEY, LOC)).read())
 
-def weather():
+def sky():
 	W = (JSON['current_observation']['weather'])
 	if SHORT != True:
 		print "Sky Conditions: "+W
 	else: print W
 
 def temp_actual():
-	UNITS = (CONFIG_INFO['units'])	#imperial/metric
 	if SHORT != True:
 		return "Temperature: "+JSON['current_observation']['temperature_string']
 	else:
-		if UNITS=="imperial":
-			return JSON['current_observation']['temp_f']
-		elif UNITS=="metric":
-			return JSON['current_observation']['temp_c']
-		else: return "invalid units value in config file"
+		return JSON['current_observation']['temp_f']
 
 # def temp_feels_like():
 # 	UNITS = (CONFIG_INFO['units'])	#imperial/metric
@@ -44,17 +43,6 @@ def temp_actual():
 # 			return JSON['current_observation']['feelslike_c']
 # 		else: return "invalid units value in config file"
 
-def heat_index():
-	UNITS = (CONFIG_INFO['units'])	#imperial/metric
-	if SHORT != True:
-		return "Heat Index: "+JSON['current_observation']['heat_index_string']
-	else:
-		if UNITS=="imperial":
-			return JSON['current_observation']['heat_index_f']
-		elif UNITS=="metric":
-			return JSON['current_observation']['heat_index_c']
-		else: return "invalid units value in config file"	
-
 def location():
 	STATE = (JSON['current_observation']['display_location']['state'])
 	CITY = (JSON['current_observation']['display_location']['city'])
@@ -63,14 +51,7 @@ def location():
 		return "Specified Location: "+CITY+", "+STATE+" "+ZIP
 	else: return CITY
 
-def detailed():
-	print "Current conditions at "+JSON['current_observation']['observation_location']['full']
-	print JSON['current_observation']['observation_time']
-	print "   %s" % temp_actual()
-	if JSON['current_observation']['heat_index_string']!="NA":
-		print "   %s" % heat_index()
-	print "   %s" % weather()
-
+#def forecast():
 
 #def help():
 
@@ -78,33 +59,30 @@ def main(argv):
 	global SHORT
 
 	try:
-		opts, args = getopt.getopt(argv,"shwtld",["SHORT","help","weather","temperature","location","all"])
+		opts, args = getopt.getopt(argv,"s",["help","sky","temperature","location"])
 	except getopt.GetoptError:
 		print "command usage error; review README file"
 	
 	if not argv:
 		fetch_data()
-		weather()
+		sky()
 		sys.exit(2)
 	for opt, arg in opts:
-		if opt in ("-s","--short"):
+		if opt == "-s":
 			SHORT=True
-		elif opt in ("-h", "--help"):
+		elif opt == "--help":
 			#help()
 			print "wthr.py" 
 			sys.exit(0)
-		elif opt in ("-w", "--weather"):
+		elif opt == "--sky":
 			fetch_data()
-			weather()
-		elif opt in ("-t", "--temperature"):
+			sky()
+		elif opt == "--temperature":
 			fetch_data()
 			temp_actual()
-		elif opt in ("-l", "--location"):
+		elif opt == "--location":
 			fetch_data()
 			location()
-		elif opt in ("-d", "--detailed"):
-			fetch_data()
-			detailed()
 
 if __name__ == "__main__":
 	main(sys.argv[1:])

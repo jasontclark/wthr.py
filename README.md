@@ -9,12 +9,11 @@ Description
 -----------
 _wthr.py_ requires an API key from Weather Underground: [http://www.wunderground.com/weather/api](http://www.wunderground.com/weather/api). The functionality of _wthr.py_ does not require a paid API key.
 
-The API key should be added to `$HOME/.wthrrc`, along with the desired zip code and units for the weather data:
+The API key should be added to `$HOME/.wthrrc`, along with the desired zip code for the weather data:
 
     {
         "key": "YOUR_API_KEY",
         "zip": "20004",
-        "units": "imperial"
     }
 
 _wthr.py_ has complete functionality of the following options:
@@ -27,7 +26,7 @@ _wthr.py_ has complete functionality of the following options:
 
 * `--detailed` gives a more detailed description of the weather overall
 
-The previous report-based options can be accompanied by `-s`, which trims the output of the reports to the raw API data from Weather Underground. The `-s` functionality is extremely useful for programs that can evaluate weather data.
+The previous report-based options can be accompanied by `-s`, which trims the output of the reports to the raw API data from Weather Underground. The `-s` functionality is extremely useful for programs that can utilize weather data.
 
 _wthr.py_ also includes the `--help` switch that provides information about the script. By default, running simply `wthr.py` will show the current sky condition.
 
@@ -45,7 +44,9 @@ If `$HOME/bin/` is included in $PATH (check by running `echo $PATH|grep "$HOME/b
 
 Changelog
 ---------
-v 0.0.1 - Original incomplete script. For v 0.0.5:
+v 0.0.1 - Original incomplete script. 
+v 0.0.2 - Pulled some incomplete functions.
+_For v 0.0.5:_
 - optimize the optargs processing
 - add more data pulling functionality
 - complete coding
