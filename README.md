@@ -9,7 +9,7 @@ Description
 -----------
 _wthr.py_ requires an API key from Weather Underground: [http://www.wunderground.com/weather/api](http://www.wunderground.com/weather/api). The functionality of _wthr.py_ does not require a paid API key.
 
-The API key should then be added to `$HOME/.wthrrc`, along with the desired zip code and units for the weather data:
+The API key should be added to `$HOME/.wthrrc`, along with the desired zip code and units for the weather data:
 
     {
         "key": "YOUR_API_KEY",
