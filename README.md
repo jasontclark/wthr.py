@@ -24,8 +24,6 @@ _wthr.py_ has complete functionality of the following options:
 
 * `--location` reports the configured location, based on the .wthrrc
 
-* `--detailed` gives a more detailed description of the weather overall
-
 The previous report-based options can be accompanied by `-s`, which trims the output of the reports to the raw API data from Weather Underground. The `-s` functionality is extremely useful for programs that can utilize weather data.
 
 _wthr.py_ also includes the `--help` switch that provides information about the script. By default, running simply `wthr.py` will show the current sky condition.
