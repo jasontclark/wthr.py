@@ -1,7 +1,7 @@
 wthr.py
 =======
 
-Version 0.0.1
+Version 0.0.2
 
 _wthr.py_ is a command-line application that pulls weather data from [Weather Underground](http://www.wunderground.com).  _wthr.py_ was intended to be used for piping weather information directly into other applications, specifically system-monitoring programs (ex. conky).
 
@@ -49,10 +49,6 @@ To-do
 
 License(s)
 ----------
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program.  If not, see [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
+This program is free software: you can redistribute it and/or modify it under the GNU General Public License, however please reference myself and/or this repository. 
 
 Data courtesy of Weather Underground, Inc. (WUI) is subject to the [Weather Underground API Terms and Conditions of Use](http://www.wunderground.com/weather/api/d/terms.html).  The author of this software is not affiliated with WUI, and the software is neither sponsored nor endorsed by WUI.
