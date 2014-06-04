@@ -1,4 +1,5 @@
 {
 	"key": "YOUR_API_KEY",
-	"zip": "20004"
+	"zip": "20004",
+	"units": "imperial"
 }

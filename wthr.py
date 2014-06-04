@@ -12,44 +12,59 @@ CONFIG_INFO = json.loads(open(CONFIG_PATH,'r').read())
 
 global JSON; JSON=None
 global SHORT; SHORT=False
+global UNITS; UNITS=None;
 
-def fetch_data():
-	global JSON
+def fetch_data(dataType):
+	global JSON, UNITS
+	UNITS=(CONFIG_INFO['units'])	#metric/imperial
 	if JSON == None:
+		# load info from config file
 		KEY = (CONFIG_INFO['key'])	#personal API key
 		LOC = (CONFIG_INFO['zip'])	#zip code
-		JSON = json.loads(urllib2.urlopen("http://api.wunderground.com/api/%s/conditions/forecast/q/%s.json" % (KEY, LOC)).read())
+		# feed KEY, LOC, and dataType (requested API data) into JSON URL
+		JSON = json.loads(urllib2.urlopen("http://api.wunderground.com/api/%s/%s/q/%s.json" % (KEY, dataType, LOC)).read())
+		# verbose
+		# print "http://api.wunderground.com/api/%s/%s/q/%s.json" % (KEY, dataType, LOC)
 
 def sky():
+	fetch_data("conditions")
 	W = (JSON['current_observation']['weather'])
 	if SHORT != True:
 		print "Sky Conditions: "+W
 	else: print W
 
 def temp_actual():
+	fetch_data("conditions")
 	if SHORT != True:
-		return "Temperature: "+JSON['current_observation']['temperature_string']
+		print "Temperature: "+JSON['current_observation']['temperature_string']
 	else:
-		return JSON['current_observation']['temp_f']
+		if UNITS=="imperial":
+			print JSON['current_observation']['temp_f']
+		elif UNITS=="metric":
+			print JSON['current_observation']['temp_c']
+		else: print "invalid units string in config file"
 
-# def temp_feels_like():
-# 	UNITS = (CONFIG_INFO['units'])	#imperial/metric
-# 	if SHORT != True:
-# 		return "Feels like: "+JSON['current_observation']['feelslike_string']
-# 	else:
-# 		if UNITS=="imperial":
-# 			return JSON['current_observation']['feelslike_f']
-# 		elif UNITS=="metric":
-# 			return JSON['current_observation']['feelslike_c']
-# 		else: return "invalid units value in config file"
+def temp_feels_like():
+	fetch_data("conditions")
+	UNITS = (CONFIG_INFO['units'])	#imperial/metric
+	if SHORT != True:
+		print "Feels like: "+JSON['current_observation']['feelslike_string']
+	else:
+		if UNITS=="imperial":
+			print JSON['current_observation']['feelslike_f']
+		elif UNITS=="metric":
+			print JSON['current_observation']['feelslike_c']
+		else: print "invalid units string in config file"
 
 def location():
+	fetch_data("conditions")
 	STATE = (JSON['current_observation']['display_location']['state'])
 	CITY = (JSON['current_observation']['display_location']['city'])
 	ZIP = (JSON['current_observation']['display_location']['zip'])
+	print CITY+STATE+ZIP
 	if SHORT != True:
-		return "Specified Location: "+CITY+", "+STATE+" "+ZIP
-	else: return CITY
+		print "Specified Location: "+CITY+", "+STATE+" "+ZIP
+	else: print CITY
 
 #def forecast():
 
@@ -59,29 +74,31 @@ def main(argv):
 	global SHORT
 
 	try:
-		opts, args = getopt.getopt(argv,"s",["help","sky","temperature","location"])
+		opts, args = getopt.getopt(argv,"s",["help","sky","temperature","feels-like","location"])
 	except getopt.GetoptError:
 		print "command usage error; review README file"
 	
 	if not argv:
-		fetch_data()
-		sky()
+		print "wthr.py"
 		sys.exit(2)
 	for opt, arg in opts:
 		if opt == "-s":
 			SHORT=True
-		elif opt == "--help":
+		elif opt == "-h":
 			#help()
 			print "wthr.py" 
 			sys.exit(0)
+		elif opt == "--help":
+			#help()
+			print "wthr.py"
+			sys.exit(0)
 		elif opt == "--sky":
-			fetch_data()
 			sky()
 		elif opt == "--temperature":
-			fetch_data()
 			temp_actual()
+		elif opt == "--feels-like":
+			temp_feels_like()
 		elif opt == "--location":
-			fetch_data()
 			location()
 
 if __name__ == "__main__":

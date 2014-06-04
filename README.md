@@ -1,7 +1,7 @@
 wthr.py
 =======
 
-Version 0.0.1
+Version 0.0.3
 
 _wthr.py_ is a command-line application that pulls weather data from [Weather Underground](http://www.wunderground.com).  _wthr.py_ was intended to be used for piping weather information directly into other applications, specifically system-monitoring programs (ex. conky).
 
@@ -9,12 +9,13 @@ Description
 -----------
 _wthr.py_ requires an API key from Weather Underground: [http://www.wunderground.com/weather/api](http://www.wunderground.com/weather/api). The functionality of _wthr.py_ does not require a paid API key, however each call of the script that _does not_ include the `-h` switch _will use one call_ to the API. 
 
-The API key should be added to `$HOME/.wthrrc`, along with the desired zip code for the weather data:
+The API key should be added to `$HOME/.wthrrc`, along with the desired zip code and units type for the weather data:
 
-    {
-        "key": "YOUR_API_KEY",
-        "zip": "20004",
-    }
+	{
+		"key": "YOUR_API_KEY",
+		"zip": "20004",
+		"units": "imperial"
+	}
 _The above template in `/wthrrc` can be used to create the .wthrrc config file._
 
 _wthr.py_ has complete functionality of the following options:
@@ -23,11 +24,13 @@ _wthr.py_ has complete functionality of the following options:
 
 * `--temperature` gives the current temperature
 
+* `--feels-like` gives the current perceivable temperature
+
 * `--location` reports the configured location, based on the .wthrrc
 
-The previous report-based options can be accompanied by `-s`, which trims the output of the reports to the raw API data from Weather Underground. The `-s` functionality is extremely useful for programs that can utilize weather data.
+The previous report-based options can be accompanied by `-s`, which trims the output of the reports to the raw API data from Weather Underground. The `-s` functionality is extremely useful for programs that process weather info.
 
-_wthr.py_ also includes the `-h` switch that provides information about the script. By default, running simply `wthr.py` will show the current sky condition.
+_wthr.py_ also includes the `-h` and `--help` switches that provide information about the script. By default, running simply `wthr.py` will show print the program name.
 
 Installation
 ------------
@@ -35,11 +38,11 @@ _wthr.py_ can be run as-is from the command line, however it is recommended to p
 
 To obtain the source for _wthr.py_ run:
 
-    git clone git://github.com/travis-g/wthr.py.git
+	git clone git://github.com/travis-g/wthr.py.git
 
-Remember to edit, move and rename the `/wthrrc` file, adding your API key and changing the zip code as desired.
+Remember to edit, move and rename the `/wthrrc` file, adding your API key and changing the zip code/units type as desired.
 
-If `$HOME/bin/` is included in $PATH (check by running `echo $PATH|grep "$HOME/bin"`) it is suggested to move _wthr.py_ there for convenience.
+If `$HOME/bin/` is included in $PATH (check by running `echo $PATH|grep "$HOME/bin:"`) it is suggested to move _wthr.py_ there for convenience.
 
 To-do
 -----
