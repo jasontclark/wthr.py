@@ -89,7 +89,7 @@ def location():
 		city = (JSON['current_observation']['display_location']['city'])
 		zipcode = (JSON['current_observation']['display_location']['zip'])
 
-		print city + state + zipcode
+		#print city + state + zipcode
 		if SHORT != True:
 			  print "Specified Location: " + city + ", " + state + " " + zipcode
 		else:
