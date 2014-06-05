@@ -26,7 +26,7 @@ def fetch_data(dataType):
 	UNITS = CONFIG_INFO['units']	#metric/imperial
 	if JSON == None:
 		# load info from config file
-		KEY = (CONFIG_INFO['key'])	#personal API key
+		KEY = CONFIG_INFO['key']	#personal API key
 		LOC = (CONFIG_INFO['zip'])	#zip code
 		# feed KEY, LOC, and dataType (requested API data) into JSON URL
 		JSON = json.loads(urllib2.urlopen("http://api.wunderground.com/api/%s/%s/q/%s.json" % (KEY, dataType, LOC)).read())
