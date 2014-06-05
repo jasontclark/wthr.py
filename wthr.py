@@ -84,20 +84,24 @@ def temp_feels_like():
 			  print "invalid units string in config file"
 
 def location():
+	  """
+		Gets the specified location
+		"""
 		fetch_data("conditions")
 		state = (JSON['current_observation']['display_location']['state'])
 		city = (JSON['current_observation']['display_location']['city'])
 		zipcode = (JSON['current_observation']['display_location']['zip'])
 
-		#print city + state + zipcode
 		if SHORT != True:
 			  print "Specified Location: " + city + ", " + state + " " + zipcode
 		else:
 			  print city
 
-#def forecast():
+def forecast():
+		pass
 
-#def help():
+def help():
+	  pass
 
 def main(argv):
 		global SHORT
