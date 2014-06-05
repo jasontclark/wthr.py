@@ -84,7 +84,7 @@ def temp_feels_like():
 			  print "invalid units string in config file"
 
 def location():
-	  """
+		"""
 		Gets the specified location
 		"""
 		fetch_data("conditions")
@@ -98,9 +98,15 @@ def location():
 			  print city
 
 def forecast():
+		"""
+		Displays current forecast
+		"""
 		pass
 
 def help():
+	  """
+		Displays help info
+		"""
 	  pass
 
 def main(argv):
