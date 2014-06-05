@@ -1,22 +1,29 @@
-#!/usr/bin/python2
+#!/usr/bin/env python
 """
 wthr.py -- Weather Underground command-line client, written in python
 """
+# fetching weather
+import urllib2, json
 
-import urllib2, json 				#fetching weather
-import os, sys, getopt, subprocess	#reading parameters
+# reading parameters
+import os, sys, getopt, subprocess
 
+# read user configs
 USR_HOME_DIR = os.path.expanduser("~")
 CONFIG_PATH = "%s/.wthrrc" % USR_HOME_DIR
-CONFIG_INFO = json.loads(open(CONFIG_PATH,'r').read())
+CONFIG_INFO = json.loads(open(CONFIG_PATH, 'r').read())
 
-global JSON; JSON=None
-global SHORT; SHORT=False
-global UNITS; UNITS=None;
+global JSON
+global SHORT
+global UNITS
+
+JSON = None
+SHORT = False
+UNITS = None
 
 def fetch_data(dataType):
-	global JSON, UNITS
-	UNITS=(CONFIG_INFO['units'])	#metric/imperial
+	#global JSON, UNITS
+	UNITS = CONFIG_INFO['units']	#metric/imperial
 	if JSON == None:
 		# load info from config file
 		KEY = (CONFIG_INFO['key'])	#personal API key
@@ -77,7 +84,7 @@ def main(argv):
 		opts, args = getopt.getopt(argv,"s",["help","sky","temperature","feels-like","location"])
 	except getopt.GetoptError:
 		print "command usage error; review README file"
-	
+
 	if not argv:
 		print "wthr.py"
 		sys.exit(2)
@@ -86,7 +93,7 @@ def main(argv):
 			SHORT=True
 		elif opt == "-h":
 			#help()
-			print "wthr.py" 
+			print "wthr.py"
 			sys.exit(0)
 		elif opt == "--help":
 			#help()
