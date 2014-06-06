@@ -34,15 +34,15 @@ UNITS = None
 Function definitions
 """
 def fetch_data(req):
-    """
-    fetch_data(req) -- pull the requested JSON data from WU using the API
-    """
-    global JSON, UNITS
+	"""
+	fetch_data(req) -- pull the requested JSON data from WU using the API
+	"""
+	global JSON, UNITS
 
 	# metric/imperial
-    UNITS = CONFIG_INFO['units']
+	UNITS = CONFIG_INFO['units']
 
-    if JSON == None:
+	if JSON == None:
 		# load info from config file
 		key = CONFIG_INFO['key']
 		loc = CONFIG_INFO['zip']
@@ -71,13 +71,14 @@ def temp_actual():
 	fetch_data("conditions")
 
 	if SHORT != True:
-	    print "Temperature: " + JSON['current_observation']['temperature_string']
+		print "Temperature: " + \
+		JSON['current_observation']['temperature_string']
 	elif UNITS == "imperial":
-	    print JSON['current_observation']['temp_f']
+		print JSON['current_observation']['temp_f']
 	elif UNITS == "metric":
 		print JSON['current_observation']['temp_c']
 	else:
-		print "invalid units string in config file."
+		print "invalid units string in config file"
 
 def temp_feels_like():
 	"""
@@ -87,9 +88,9 @@ def temp_feels_like():
 	UNITS = (CONFIG_INFO['units'])	#imperial/metric
 
 	if SHORT != True:
-	    print "Feels like: " + JSON['current_observation']['feelslike_string']
+		print "Feels like: " + JSON['current_observation']['feelslike_string']
 	elif UNITS == "imperial":
-	    print JSON['current_observation']['feelslike_f']
+		print JSON['current_observation']['feelslike_f']
 	elif UNITS == "metric":
 		print JSON['current_observation']['feelslike_c']
 	else:
@@ -110,10 +111,26 @@ def location():
 		print city
 
 def forecast():
+<<<<<<< HEAD
 	"""
 	forecast() -- prints current forecast
 	"""
 	pass
+=======
+	"""
+	Displays current forecast
+	"""
+	fetch_data("forecast")
+	UNITS = (CONFIG_INFO['units'])
+	forecast = (JSON['forecast']['txt_forecast'])
+
+	if UNITS == 'metric':
+		for day in forecast['forecastday']:
+			print day['title'] + ': ' + day['fcttext_metric']
+	elif UNITS == 'imperial':
+		for day in forecast['forecastday']:
+			print day['title'] + ': ' + day['fcttext']
+>>>>>>> d7bb4921c51044bd0dc47536476e4b57a5d1b1aa
 
 def help():
 	"""
@@ -122,6 +139,7 @@ def help():
 	pass
 
 def main(argv):
+<<<<<<< HEAD
 	global SHORT
 
 	try:
@@ -151,6 +169,43 @@ def main(argv):
 				temp_feels_like()
 			elif opt == "--location":
 				location()
+=======
+	"""
+	Main
+	"""
+	global SHORT
+
+	try:
+		opts, args = getopt.getopt(argv, "s", \
+		["help", "sky", "temperature", "feels-like", "location", "forecast"])
+	except getopt.GetoptError:
+			print "command usage error; review README file"
+
+	if not argv:
+			print "wthr.py"
+			sys.exit(2)
+	for opt, arg in opts:
+		if opt == "-s":
+			  SHORT = True
+		elif opt == "-h":
+			  #help()
+			  print "wthr.py"
+			  sys.exit(0)
+		elif opt == "--help":
+			  #help()
+			  print "wthr.py"
+			  sys.exit(0)
+		elif opt == "--sky":
+			  sky()
+		elif opt == "--temperature":
+			  temp_actual()
+		elif opt == "--feels-like":
+			  temp_feels_like()
+		elif opt == "--location":
+			  location()
+		elif opt == "--forecast":
+			forecast()
+>>>>>>> d7bb4921c51044bd0dc47536476e4b57a5d1b1aa
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
