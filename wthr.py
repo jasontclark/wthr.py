@@ -59,7 +59,8 @@ def temp_actual():
 		fetch_data("conditions")
 
 		if SHORT != True:
-		    print "Temperature: " + JSON['current_observation']['temperature_string']
+		    print "Temperature: " + \
+            JSON['current_observation']['temperature_string']
 		elif UNITS == "imperial":
 		    print JSON['current_observation']['temp_f']
 		elif UNITS == "metric":
@@ -98,10 +99,19 @@ def location():
 			  print city
 
 def forecast():
-		"""
-		Displays current forecast
-		"""
-		pass
+    """
+    Displays current forecast
+    """
+    fetch_data("forecast")
+    UNITS = (CONFIG_INFO['units'])
+    forecast = (JSON['forecast']['txt_forecast'])
+
+    if UNITS == 'metric':
+        for day in forecast['forecastday']:
+            print day['title'] + ': ' + day['fcttext_metric']
+    elif UNITS == 'imperial':
+        for day in forecast['forecastday']:
+            print day['title'] + ': ' + day['fcttext']
 
 def help():
 	  """
@@ -110,36 +120,41 @@ def help():
 	  pass
 
 def main(argv):
-		global SHORT
+    """
+    Main
+    """
+    global SHORT
 
-		try:
-				opts, args = getopt.getopt(argv, "s", \
-				["help", "sky", "temperature", "feels-like", "location"])
-		except getopt.GetoptError:
-				print "command usage error; review README file"
+    try:
+        opts, args = getopt.getopt(argv, "s", \
+        ["help", "sky", "temperature", "feels-like", "location", "forecast"])
+    except getopt.GetoptError:
+    		print "command usage error; review README file"
 
-		if not argv:
-				print "wthr.py"
-				sys.exit(2)
-		for opt, arg in opts:
-				if opt == "-s":
-					SHORT = True
-				elif opt == "-h":
-					#help()
-					print "wthr.py"
-					sys.exit(0)
-				elif opt == "--help":
-					#help()
-					print "wthr.py"
-					sys.exit(0)
-				elif opt == "--sky":
-					sky()
-				elif opt == "--temperature":
-					temp_actual()
-				elif opt == "--feels-like":
-					temp_feels_like()
-				elif opt == "--location":
-					location()
+    if not argv:
+    		print "wthr.py"
+    		sys.exit(2)
+    for opt, arg in opts:
+        if opt == "-s":
+        	  SHORT = True
+        elif opt == "-h":
+        	  #help()
+        	  print "wthr.py"
+        	  sys.exit(0)
+        elif opt == "--help":
+        	  #help()
+        	  print "wthr.py"
+        	  sys.exit(0)
+        elif opt == "--sky":
+        	  sky()
+        elif opt == "--temperature":
+        	  temp_actual()
+        elif opt == "--feels-like":
+        	  temp_feels_like()
+        elif opt == "--location":
+        	  location()
+        elif opt == "--forecast":
+            forecast()
 
 if __name__ == "__main__":
 		main(sys.argv[1:])
