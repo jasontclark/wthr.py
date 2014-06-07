@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python2
 """
 wthr.py -- Weather Underground command-line client, written in python
 """

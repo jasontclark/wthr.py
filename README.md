@@ -26,6 +26,8 @@ _wthr.py_ has complete functionality of the following options:
 
 * `--feels-like` gives the current perceivable temperature
 
+* `--forecast` gives the forecast information
+
 * `--location` reports the configured location, based on the .wthrrc
 
 The previous report-based options can be accompanied by `-s`, which trims the output of the reports to the raw API data from Weather Underground. The `-s` functionality is extremely useful for programs that process weather info.
