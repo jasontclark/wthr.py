@@ -10,7 +10,7 @@ Imports
 import json
 # for fetching WU JSONs with Python2 compatibilty
 try:
-	import urllib.request as urllib2
+	from urllib.request import urlopen
 except:
 	import urllib2
 
@@ -57,7 +57,7 @@ def fetch_data(req):
 		wu_url = 'http://api.wunderground.com/api/%s/%s/q/%s.json' % (key, req, loc)
 		
 		# assign var JSON to returned JSON file
-		JSON = json.loads(urllib2.urlopen(wu_url).read())
+		JSON = json.loads(urlopen(wu_url).read().decode('utf8'))
 
 def sky():
 	"""

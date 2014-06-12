@@ -1,9 +1,9 @@
 wthr.py
 =======
 
-Version 0.0.3
+Version 0.0.4
 
-_wthr.py_ is a command-line application that pulls weather data from [Weather Underground](http://www.wunderground.com).  _wthr.py_ was intended to be used for piping weather information directly into other applications, specifically system-monitoring programs (ex. conky).
+_wthr.py_ is a Python3-based command-line application that pulls weather data from [Weather Underground](http://www.wunderground.com).  _wthr.py_ was intended to be used for piping weather information directly into other applications, specifically system-monitoring programs (ex. conky).
 
 Description
 -----------
