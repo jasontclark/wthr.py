@@ -11,8 +11,8 @@ import json
 # for fetching WU JSONs with Python2 compatibilty
 try:
 	from urllib.request import urlopen
-except:
-	import urllib2
+except ImportError:
+	from urllib import urlopen
 
 # for reading parameters
 import os, sys, getopt
