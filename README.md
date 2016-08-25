@@ -1,7 +1,7 @@
 wunderwheel
 ===========
 
-![wunderwheel](https://www.thesearchagency.com/wp-content/uploads/2009/11/the-toy-wonder-wheel.jpg)
+![wunderwheel](http://content.ytmnd.com/content/8/9/9/899f5440244ecccbeb25a2fd7a55e16c.gif)
 
 Version 0.0.4
 
