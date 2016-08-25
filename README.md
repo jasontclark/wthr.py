@@ -1,6 +1,8 @@
 wunderwheel
 ===========
 
+![wunderwheel](https://www.thesearchagency.com/wp-content/uploads/2009/11/the-toy-wonder-wheel.jpg)
+
 Version 0.0.4
 
 _wunderwheel_ is a Python-based command-line application that pulls weather data from [Weather Underground](http://www.wunderground.com).  _wunderwheel_ was intended to be used for piping weather information directly into other applications, specifically system-monitoring programs (ex. conky).
